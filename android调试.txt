@@ -1,0 +1,14 @@
+ 解决：Adb connection Error:远程主机强迫关闭了一个现有的连接
+分类： Android应用 2013-08-09 09:40 212人阅读 评论(0) 收藏 举报
+在使用Eclipse 开发的时候，由于手机usb口拔插频繁，会偶尔发生“Adb connection Error:远程主机强迫关闭了一个现有的连接 ” ，即usb连上了，但adb发现不了设备,下面是解决办法,也是参考网上的朋友的,多了自己的截图
+
+1. 使用androids dk目录中的 androidSDK目录\tools 下的android脚本，cmd命令行中执行 android update adb
+
+2. 成功运行后，会在用户名录下产生，C:\Users\用户名\.android\adb_usb.ini ， 我的是win7，xp路径会有不同；
+
+3.手机连上usb，打开电脑的设备管理器，找出当前手机的usb VID码,如我的设备码是VID_2717, 即0x2717  
+
+4.打开C:\Users\用户名\.android\adb_usb.ini ,在尾行添加0x2717
+
+5.拔掉usb线，执行adb kill-server 重启adb start-server，重新插上usb 就可以了
+
