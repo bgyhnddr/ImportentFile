@@ -1,0 +1,5 @@
+openssl genrsa -out install.key 2048
+
+openssl req -new -x509 -key install.key -out myselfsigned.cer -days 365 -subj /CN=112.124.112.166
+
+openssl pkcs12 -export -out myselfsigned.pfx -inkey myselfsigned.key -in myselfsigned.cer
