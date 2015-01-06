@@ -1,5 +1,15 @@
-openssl genrsa -out install.key 2048
+生成安装密钥：openssl genrsa -out install.key 2048
 
-openssl req -new -x509 -key install.key -out install.cer -days 365 -subj /CN=112.124.112.166
+通过安装密钥生成cer文件：openssl req -new -x509 -key install.key -out install.cer -days 365 -subj /CN=112.124.112.166
 
-openssl pkcs12 -export -out install.pfx -inkey install.key -in install.cer
+通过cer文件生成导入iis的pfx文件：openssl pkcs12 -export -out install.pfx -inkey install.key -in install.cer
+
+
+创建自己的CA：
+生成CA根证书密钥：openssl genrsa -out myCA.key 2048
+生成根证书cer：openssl req -x509 -new -key myCA.key -out myCA.cer -days 730 -subj /CN="My Custom CA"
+
+生成密钥：openssl genrsa -out mycert1.key 2048
+生成CSR文件：openssl req -new -out mycert1.req -key mycert1.key -subj /CN=www2.mysite.com
+
+通过根证书密钥与crs文件生成web服务器cer文件：openssl x509 -req -in mycert1.req -out mycert1.cer -CAkey myCA.key -CA myCA.cer -days 365 -CAcreateserial -CAserial serial
