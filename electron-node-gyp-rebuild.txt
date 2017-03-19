@@ -1,0 +1,5 @@
+deal with rebuild in electron
+
+npm run prepublish
+node-gyp configure --module_name={模块名字为缺少的某个.node文件的名字或者版本不同的.node文件} --module_path={缺少模块的访问路径如：../lib/binding/electron-v1.6-win32-x64}
+node-gyp rebuild --target=1.6.2 --arch=x64 --target_platform=win32 --dist-url=https://atom.io/download/atom-shell --module_name={模块名字为缺少的某个.node文件的名字或者版本不同的.node文件} --module_path={缺少模块的访问路径如：../lib/binding/electron-v1.6-win32-x64}
