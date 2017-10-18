@@ -1,15 +1,24 @@
-Éú³É°²×°ÃÜÔ¿£ºopenssl genrsa -out install.key 2048
+ç”Ÿæˆå®‰è£…å¯†é’¥ï¼šopenssl genrsa -out install.key 2048
 
-Í¨¹ı°²×°ÃÜÔ¿Éú³ÉcerÎÄ¼ş£ºopenssl req -new -x509 -key install.key -out install.cer -days 365 -subj /CN=112.124.112.166
+é€šè¿‡å®‰è£…å¯†é’¥ç”Ÿæˆceræ–‡ä»¶ï¼šopenssl req -new -x509 -key install.key -out install.cer -days 365 -subj /CN=112.124.112.166
 
-Í¨¹ıcerÎÄ¼şÉú³Éµ¼ÈëiisµÄpfxÎÄ¼ş£ºopenssl pkcs12 -export -out install.pfx -inkey install.key -in install.cer
+é€šè¿‡ceræ–‡ä»¶ç”Ÿæˆå¯¼å…¥iisçš„pfxæ–‡ä»¶ï¼šopenssl pkcs12 -export -out install.pfx -inkey install.key -in install.cer
 
 
-´´½¨×Ô¼ºµÄCA£º
-Éú³ÉCA¸ùÖ¤ÊéÃÜÔ¿£ºopenssl genrsa -out myCA.key 2048
-Éú³É¸ùÖ¤Êécer£ºopenssl req -x509 -new -key myCA.key -out myCA.cer -days 730 -subj /CN="My Custom CA"
+åˆ›å»ºè‡ªå·±çš„CAï¼š
+ç”ŸæˆCAæ ¹è¯ä¹¦å¯†é’¥ï¼šopenssl genrsa -out myCA.key 2048
+ç”Ÿæˆæ ¹è¯ä¹¦cerï¼šopenssl req -x509 -new -key myCA.key -out myCA.cer -days 730 -subj /CN="My Custom CA"
 
-Éú³ÉÃÜÔ¿£ºopenssl genrsa -out mycert1.key 2048
-Éú³ÉCSRÎÄ¼ş£ºopenssl req -new -out mycert1.req -key mycert1.key -subj /CN=www2.mysite.com
+ç”Ÿæˆå¯†é’¥ï¼šopenssl genrsa -out mycert1.key 2048
+ç”ŸæˆCSRæ–‡ä»¶ï¼šopenssl req -new -out mycert1.req -key mycert1.key -subj /CN=www2.mysite.com
 
-Í¨¹ı¸ùÖ¤ÊéÃÜÔ¿ÓëcrsÎÄ¼şÉú³Éweb·şÎñÆ÷cerÎÄ¼ş£ºopenssl x509 -req -in mycert1.req -out mycert1.cer -CAkey myCA.key -CA myCA.cer -days 365 -CAcreateserial -CAserial serial
+é€šè¿‡æ ¹è¯ä¹¦å¯†é’¥ä¸crsæ–‡ä»¶ç”ŸæˆwebæœåŠ¡å™¨ceræ–‡ä»¶ï¼šopenssl x509 -req -in mycert1.req -out mycert1.cer -CAkey myCA.key -CA myCA.cer -days 365 -CAcreateserial -CAserial serial
+
+
+
+raså¯†é’¥å¯¹ï¼ŒåŒ…å«pemï¼Œcerï¼Œpfx
+
+openssl genrsa -out openssl.pem 1024 Â --pemç§é’¥
+openssl req -new -x509 -key openssl.pem -out openssl.cer -days 3650 -subj /CN=zhangwei.website --cerè¯ä¹¦
+openssl pkcs12 -export -out openssl.pfx -inkey openssl.key -in openssl.cer --pfxæ–‡ä»¶
+openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem #ç”Ÿæˆå…¬é’¥
