@@ -22,3 +22,5 @@ openssl genrsa -out openssl.pem 1024  --pem私钥
 openssl req -new -x509 -key openssl.pem -out openssl.cer -days 3650 -subj /CN=zhangwei.website --cer证书
 openssl pkcs12 -export -out openssl.pfx -inkey openssl.key -in openssl.cer --pfx文件
 openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem #生成公钥
+
+AAA
